@@ -8,12 +8,32 @@ function crearUsuario() {
   // {{nombre}} debe ser el nombre definido en cada instancia
   // Devuelve la clase
   // Tu código:
+
+  //Función constructora donde asignamos los métodos
+  //al Prototipo, no a la función como tal:
+  function Usuario(opciones) {
+    //Atributos:
+    this.usuario = opciones.usuario;
+    this.nombre = opciones.nombre;
+    this.email = opciones.email;
+    this.password = opciones.password;
+  }
+  //Métodos agregados al prototipo de la función constructora:
+  Usuario.prototype.saludar = function () {
+    return 'Hola, mi nombre es ' + this.nombre
+  }
+
+  return Usuario;
 }
 
 function agregarMetodoPrototype(Constructor) {
   // Agrega un método al Constructor del `prototype`
   // El método debe llamarse "saludar" y debe devolver la string "Hello World!"
   // Tu código:
+
+  Constructor.prototype.saludar = function () {
+    return "Hello World!";
+  }
 }
 
 function agregarStringInvertida() {
@@ -22,46 +42,83 @@ function agregarStringInvertida() {
   // Ej: 'menem'.reverse() => menem
   // 'toni'.reverse() => 'inot'
   // Pista: Necesitarás usar "this" dentro de "reverse"
+
+  String.prototype.reverse = function () {
+    var aux = "";
+
+    for (var i = this.length - 1; i >= 0; i--) {
+      // toni=>    4-1=3   i     disminuyendo el valor de i osea i--
+      //           3-1=2   n
+      //           2-1=1   o
+      //           1-1=0   t
+
+      aux = aux + this.charAt(i);
+      // i   = ""  +  i
+      // in  = i   +  n
+      // int = in  +  o
+      // inot= ino +  t
+    }
+    return aux;
+  }
 }
 
 // ---------------------------------------------------------------------------//
-  //Crea el constructor de la clase "Persona"
-  //Debe tener las propiedades: "nombre", "apellido", "edad" y "domicilio"
-  //Debe tener un método llamado "detalle" que nos devuelve un objeto con las propiedades de la persona y sus valores.
-  //Ej: { 
-    //   Nombre: 'Juan',
-    //   Apellido: 'Perez',
-    //   Edad: 22,
-    //   Domicilio: 'Saavedra 123'
-    //  }
+//Crea el constructor de la clase "Persona"
+//Debe tener las propiedades: "nombre", "apellido", "edad" y "domicilio"
+//Debe tener un método llamado "detalle" que nos devuelve un objeto con las propiedades de la persona y sus valores.
+//Ej: { 
+//   Nombre: 'Juan',
+//   Apellido: 'Perez',
+//   Edad: 22,
+//   Domicilio: 'Saavedra 123'
+//  }
 
-  class Persona {
-    constructor(/*Escribir los argumentos que recibe el constructor*/) {
-      // Crea el constructor:
-
-    }
+class Persona {
+  constructor(/*Escribir los argumentos que recibe el constructor*/
+    nombre, apellido, edad, domicilio) {
+    // Crea el constructor:
+      this.nombre = nombre,
+      this.apellido = apellido,
+      this.edad = edad,
+      this.domicilio = domicilio,
+      this.detalle = function () {
+        return {
+          Nombre: this.nombre,
+          Apellido: this.apellido,
+          Edad: this.edad,
+          Domicilio: this.domicilio,
+        }
+      }
+  }
 }
 
 function crearInstanciaPersona(nombre, apellido, edad, dir) {
   //Con esta función vamos a crear una nueva persona a partir de nuestro constructor de persona (creado en el ejercicio anterior)
   //Recibirá los valores "Juan", "Perez", 22, "Saavedra 123" para sus respectivas propiedades
   //Devolver la nueva persona creada
+
+  let persona = new Persona(nombre, apellido, edad, dir);
+  return persona;
 }
-  
+
 function agregarMetodo() {
   //La función agrega un método "datos" a la clase Persona que toma el nombre y la edad de la persona y devuelve: 
   //Ej: "Juan, 22 años"
-}
-  
 
-// No modificar nada debajo de esta línea
-// --------------------------------
+  Persona.prototype.datos = function () {
+    return this.nombre + ", " + this.edad + " años" ;
+  }
+  }
 
-module.exports = {
-  crearUsuario,
-  agregarMetodoPrototype,
-  agregarStringInvertida,
-  crearInstanciaPersona,
-  agregarMetodo, 
-  Persona
-};
+
+  // No modificar nada debajo de esta línea
+  // --------------------------------
+
+  module.exports = {
+    crearUsuario,
+    agregarMetodoPrototype,
+    agregarStringInvertida,
+    crearInstanciaPersona,
+    agregarMetodo,
+    Persona
+  };
