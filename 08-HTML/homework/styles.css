@@ -1,0 +1,51 @@
+h1 {
+    color: rgb(58, 53, 53);
+}
+
+img {
+    width: 300px;
+    height: 300px;
+}
+
+#thirdDiv {
+    height: 600px;
+    width: 500px;
+    margin: 0 auto;
+    background-color: #fd1d1d;
+    padding: 50px;
+    border: 5px solid black;
+}
+
+#spanId {
+    font-size: 18px;
+    margin: 50px;
+}
+
+
+.divClass{
+    text-align: center;
+    width: 500px;
+    margin: 0 auto;
+}
+
+
+.animated-background {
+    background: linear-gradient(to right, #833ab4,
+            #fd1d1d, #fcb045);
+    background-size: 400% 400%;
+    animation: animate-background 10s infinite ease-in-out;
+}
+
+@keyframes animate-background {
+    0% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
